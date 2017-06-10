@@ -1,0 +1,57 @@
+buildscript {
+    repositories { jcenter() }
+    dependencies {
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:1.5.3.RELEASE"
+        classpath 'org.springframework:springloaded:1.2.6.RELEASE'
+        classpath('se.transmode.gradle:gradle-docker:1.2')
+
+    }
+}
+
+plugins {
+    id 'org.springframework.boot' version '1.5.3.RELEASE'
+}
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'idea'
+apply plugin: 'docker'
+idea {
+    module {
+        inheritOutputDirs = false
+        outputDir = file("$buildDir/classes/main/")
+    }
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+war{
+    baseName = 'oddoreven'
+}
+
+//Get dependencies from Maven central repository
+repositories {
+    mavenCentral()
+}
+
+//Project dependencies
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-web")
+    compile("org.thymeleaf:thymeleaf-spring4")
+    compile("nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect")
+    providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
+    testCompile 'junit:junit:4.12'
+}
+
+task buildDocker(type: Docker, dependsOn: build) {      // this task will build our Docker image
+    push = false
+    applicationName = 'oddoreven'
+    dockerfile = file('Dockerfile')
+    tagVersion = System.getenv('TRAVIS_BUILD_NUMBER') ? System.getenv('TRAVIS_BUILD_NUMBER') : 0
+    doFirst {
+        copy {
+            from war.archivePath
+            into stageDir
+        }
+    }
+}

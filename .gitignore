@@ -1,0 +1,10 @@
+/out
+/build/
+workspace.xml
+.idea
+*.DS_Store
+.gradle
+.build
+*.jar
+!gradle/wrapper/gradle-wrapper.jar
+gradlew.bat
