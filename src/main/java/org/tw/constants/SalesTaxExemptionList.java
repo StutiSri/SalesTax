@@ -1,4 +1,4 @@
-package org.tw.salestax;
+package org.tw.constants;
 
 public enum SalesTaxExemptionList {
     chocolate, pill, book;

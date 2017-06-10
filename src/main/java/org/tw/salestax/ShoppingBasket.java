@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class ShoppingBasket {
 
-    public static final String PRICE_INDICATOR = "at";
+    public static final String PRICE_INDICATOR = " at ";
     public static final String ITEM_IMPORTED_INDICATOR = "imported";
 
     public ArrayList<Item> createItemsFromList(ArrayList<String> inputItemList) {

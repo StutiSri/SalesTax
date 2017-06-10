@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static org.tw.salestax.SalesTaxValues.SALES_TAX;
+import static org.tw.constants.SalesTaxValues.SALES_TAX;
 
 public class SalesTaxTest {
     @Test
@@ -33,14 +33,16 @@ public class SalesTaxTest {
         Item item = new Item(1, "music CD", false, 14.99);
         Double expectedSalesTax = 1.50;
         double delta = 0.001;
-        assertEquals(expectedSalesTax, (Double) item.calculateSalesTax(), delta);
+
+        assertEquals(expectedSalesTax, (Double) item.getSalesTax(), delta);
     }
 
     @Test
     public void shouldExemptSalesTaxOnItemsFromExemptedList(){
         Item item = new Item(1, "book", false, 15.99);
         Double expectedSalesTax = 0.0;
-        assertEquals(expectedSalesTax, (Double) item.calculateSalesTax());
+
+        assertEquals(expectedSalesTax, (Double) item.getSalesTax());
     }
 
     @Test
@@ -48,6 +50,20 @@ public class SalesTaxTest {
         Item item = new Item(1, "imported chocolate bar", true, 10.00);
         Double expectedSalesTax = 0.50;
         double delta = 0.001;
-        assertEquals(expectedSalesTax, (Double) item.calculateSalesTax(), delta);
+
+        assertEquals(expectedSalesTax, (Double) item.getSalesTax(), delta);
+    }
+
+    @Test
+    public void shouldReturnTotalSalesTaxForItemsInShoppingBasket(){
+        ArrayList<String> inputItemList = new ArrayList<>();
+        inputItemList.add("1 imported box of chocolates at 10.00");
+        inputItemList.add("1 imported bottle of perfume at 47.50");
+        Double expectedTotalSalesTax = 7.65;
+        double delta = 0.001;
+
+        ArrayList<Item> itemList = new ShoppingBasket().createItemsFromList(inputItemList);
+
+        assertEquals(expectedTotalSalesTax, (Double)new SalesTaxCalculator().calculateTotalSalesTax(itemList));
     }
 }

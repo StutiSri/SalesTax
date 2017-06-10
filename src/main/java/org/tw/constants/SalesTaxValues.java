@@ -1,4 +1,4 @@
-package org.tw.salestax;
+package org.tw.constants;
 
 public enum SalesTaxValues {
     SALES_TAX(10), IMPORT_SALES_TAX(5);
