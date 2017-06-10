@@ -15,6 +15,7 @@ apply plugin: 'java'
 apply plugin: 'war'
 apply plugin: 'idea'
 apply plugin: 'docker'
+
 idea {
     module {
         inheritOutputDirs = false

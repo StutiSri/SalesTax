@@ -17,11 +17,11 @@ public class ShoppingBasket {
             int quantity = getQuantityFromItemDetails(itemDetails[0]);
             String name = getNameFromItemDetails(itemDetails[0]);
 
-//            boolean isImported = false;
-//            if(itemDetails[0].contains(ITEM_IMPORTED_INDICATOR))
-//                isImported = true;
+            boolean isImported = false;
+            if(itemDetails[0].contains(ITEM_IMPORTED_INDICATOR))
+                isImported = true;
 
-            itemList.add(new Item(quantity, name, shelfPrice));
+            itemList.add(new Item(quantity, name,isImported, shelfPrice));
         }
         return itemList;
     }

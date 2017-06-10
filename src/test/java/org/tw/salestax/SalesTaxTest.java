@@ -21,7 +21,7 @@ public class SalesTaxTest {
         ArrayList<String> inputItemList = new ArrayList<>();
         inputItemList.add("1 imported book at 12.49");
         ArrayList<Item> expectedItems = new ArrayList<>();
-        expectedItems.add(new Item(1, "imported book", 12.49));
+        expectedItems.add(new Item(1, "imported book", true, 12.49));
 
         ArrayList<Item> items = shoppingBasket.createItemsFromList(inputItemList);
 
@@ -30,7 +30,7 @@ public class SalesTaxTest {
 
     @Test
     public void shouldReturnSalesTaxOfItem(){
-        Item item = new Item(1, "music CD", 14.99);
+        Item item = new Item(1, "music CD", false, 14.99);
         Double expectedSalesTax = 1.50;
         double delta = 0.001;
         assertEquals(expectedSalesTax, (Double) item.calculateSalesTax(), delta);
@@ -38,8 +38,16 @@ public class SalesTaxTest {
 
     @Test
     public void shouldExemptSalesTaxOnItemsFromExemptedList(){
-        Item item = new Item(1, "book", 15.99);
+        Item item = new Item(1, "book", false, 15.99);
         Double expectedSalesTax = 0.0;
         assertEquals(expectedSalesTax, (Double) item.calculateSalesTax());
+    }
+
+    @Test
+    public void shouldApplyAdditionalSalesTaxOnImportedItems(){
+        Item item = new Item(1, "imported chocolate bar", true, 10.00);
+        Double expectedSalesTax = 0.50;
+        double delta = 0.001;
+        assertEquals(expectedSalesTax, (Double) item.calculateSalesTax(), delta);
     }
 }

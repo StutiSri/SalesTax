@@ -1,7 +1,7 @@
 package org.tw.salestax;
 
 public enum SalesTaxValues {
-    SALES_TAX(10);
+    SALES_TAX(10), IMPORT_SALES_TAX(5);
 
     private final int value;
 
