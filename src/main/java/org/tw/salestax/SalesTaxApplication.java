@@ -1,7 +1,8 @@
 package org.tw.salestax;
 
-public class Main {
+public class SalesTaxApplication {
     public static void main(String[] args) {
 
     }
+    
 }
