@@ -4,5 +4,5 @@ public class SalesTaxApplication {
     public static void main(String[] args) {
 
     }
-    
+
 }
