@@ -26,7 +26,7 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 war{
-    baseName = 'oddoreven'
+    baseName = 'salestax'
 }
 
 //Get dependencies from Maven central repository
@@ -43,9 +43,11 @@ dependencies {
     testCompile 'junit:junit:4.12'
 }
 
+group = "stutisrivastv"
+
 task buildDocker(type: Docker, dependsOn: build) {      // this task will build our Docker image
-    push = false
-    applicationName = 'oddoreven'
+    push = true
+    applicationName = 'salestax'
     dockerfile = file('Dockerfile')
     tagVersion = System.getenv('TRAVIS_BUILD_NUMBER') ? System.getenv('TRAVIS_BUILD_NUMBER') : 0
     doFirst {
