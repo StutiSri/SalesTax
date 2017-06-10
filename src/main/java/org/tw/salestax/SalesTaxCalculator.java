@@ -8,7 +8,17 @@ public class SalesTaxCalculator {
         double totalSalesTax = 0;
         for(Item item : itemList)
             totalSalesTax += item.getSalesTax();
-        totalSalesTax = Math.round(totalSalesTax * 20.0) / 20.0;
-        return totalSalesTax;
+        return roundOff(totalSalesTax);
+    }
+
+    public String calculateTotalAmount(ArrayList<Item> itemList) {
+        double totalPrice = calculateTotalSalesTax(itemList);
+        for(Item item : itemList)
+            totalPrice += item.getShelfPrice();
+        return String.format("%.2f", totalPrice);
+    }
+
+    private double roundOff(double value) {
+        return Math.ceil(value * 20) / 20.0;
     }
 }

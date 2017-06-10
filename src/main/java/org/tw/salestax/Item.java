@@ -48,4 +48,8 @@ public class Item {
     public double getFinalPrice() {
         return finalPrice;
     }
+
+    public double getShelfPrice() {
+        return shelfPrice;
+    }
 }

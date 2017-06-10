@@ -60,10 +60,22 @@ public class SalesTaxTest {
         inputItemList.add("1 imported box of chocolates at 10.00");
         inputItemList.add("1 imported bottle of perfume at 47.50");
         Double expectedTotalSalesTax = 7.65;
-        double delta = 0.001;
 
         ArrayList<Item> itemList = new ShoppingBasket().createItemsFromList(inputItemList);
 
         assertEquals(expectedTotalSalesTax, (Double)new SalesTaxCalculator().calculateTotalSalesTax(itemList));
+    }
+
+    @Test
+    public void shouldReturnTotalAmountForShoppingBasket(){
+        ArrayList<String> inputItemList = new ArrayList<>();
+        inputItemList.add("1 imported bottle of perfume at 27.99");
+        inputItemList.add("1 bottle of perfume at 18.99");
+        inputItemList.add("1 packet of headache pills at 9.75");
+        inputItemList.add("1 box of imported chocolates at 11.25");
+        String expectedTotalAmount = "74.68";
+
+        ArrayList<Item> itemList = new ShoppingBasket().createItemsFromList(inputItemList);
+        assertEquals(expectedTotalAmount, new SalesTaxCalculator().calculateTotalAmount(itemList));
     }
 }
