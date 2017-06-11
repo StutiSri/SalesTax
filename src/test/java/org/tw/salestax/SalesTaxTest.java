@@ -121,4 +121,20 @@ public class SalesTaxTest {
 
         assertEquals(expectedReceipt, stringWriter.toString());
     }
+
+    @Test
+    public void shouldPrintErrorMessageForInvalidInputFormat(){
+        InputReader inputReader = new ConsoleInputReader(new BufferedReader(new StringReader("1 book at 12.49\n" +
+                "1 music CD for 14.99\n" +
+                "1 chocolate bar at 0.85\n\n")));
+
+        String expectedErrorMessage = "Kindly re-enter the details of the basket in the following format : <quantity> <name " +
+                "details> at <price>\n\nThank you!";
+
+        StringWriter stringWriter = new StringWriter();
+        OutputWriter outputWriter = new ConsoleOutputWriter(new BufferedWriter(stringWriter));
+        new ReceiptGenerator().start(inputReader, outputWriter);
+
+        assertEquals(expectedErrorMessage, stringWriter.toString());
+    }
 }

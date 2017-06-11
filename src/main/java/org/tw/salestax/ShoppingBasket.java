@@ -1,8 +1,10 @@
 package org.tw.salestax;
 
-import org.apache.tomcat.util.digester.ArrayStack;
+import org.tw.outputwriter.OutputWriter;
 
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class ShoppingBasket {
 
@@ -12,6 +14,8 @@ public class ShoppingBasket {
     public ArrayList<Item> createItemsFromList(ArrayList<String> inputItemList) {
         ArrayList<Item> itemList = new ArrayList<>();
         for(String inputItem : inputItemList){
+            if(!isValidInput(inputItem))
+                return null;
             String[] itemDetails = inputItem.split(PRICE_INDICATOR);
             double shelfPrice = Double.parseDouble(itemDetails[1]);
             int quantity = getQuantityFromItemDetails(itemDetails[0]);
@@ -24,6 +28,12 @@ public class ShoppingBasket {
             itemList.add(new Item(quantity, name,isImported, shelfPrice));
         }
         return itemList;
+    }
+
+    private boolean isValidInput(String inputItem) {
+        Pattern inputPattern = Pattern.compile("\\d+[\\s\\w+\\s]+at\\s\\d+(\\.\\d{1,2})?");
+        Matcher matcher = inputPattern.matcher(inputItem);
+        return matcher.matches();
     }
 
     private String getNameFromItemDetails(String itemDetail) {
