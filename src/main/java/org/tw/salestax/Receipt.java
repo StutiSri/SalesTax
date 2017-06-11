@@ -19,7 +19,7 @@ public class Receipt {
         for(Item item : items)
             receipt += item + "\n";
         receipt += "Sales Taxes - " + String.format("%.2f",salesTaxInfo) + "\n";
-        receipt += "Total - " + String.format("%.2f",totalAmountInfo) + "\n";
+        receipt += "Total - " + String.format("%.2f",totalAmountInfo) + "\n\n";
         return receipt;
     }
 }
