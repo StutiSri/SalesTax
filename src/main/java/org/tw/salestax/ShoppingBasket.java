@@ -10,6 +10,7 @@ public class ShoppingBasket {
 
     public static final String PRICE_INDICATOR = " at ";
     public static final String ITEM_IMPORTED_INDICATOR = "imported";
+    public static final String REGEX_FOR_VALID_INPUT = "\\d+[\\s\\w]+\\sat\\s\\d+(\\.\\d{1,2})?";
 
     public ArrayList<Item> createItemsFromList(ArrayList<String> inputItemList) {
         ArrayList<Item> itemList = new ArrayList<>();
@@ -31,7 +32,7 @@ public class ShoppingBasket {
     }
 
     private boolean isValidInput(String inputItem) {
-        Pattern inputPattern = Pattern.compile("\\d+[\\s\\w+\\s]+at\\s\\d+(\\.\\d{1,2})?");
+        Pattern inputPattern = Pattern.compile(REGEX_FOR_VALID_INPUT);
         Matcher matcher = inputPattern.matcher(inputItem);
         return matcher.matches();
     }

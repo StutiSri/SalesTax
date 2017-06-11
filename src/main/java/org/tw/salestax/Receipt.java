@@ -22,4 +22,16 @@ public class Receipt {
         receipt += "Total - " + String.format("%.2f",totalAmountInfo) + "\n\n";
         return receipt;
     }
+
+    public ArrayList<Item> getItems() {
+        return items;
+    }
+
+    public String getSalesTax() {
+        return String.format("%.2f", salesTaxInfo);
+    }
+
+    public String getTotalAmount() {
+        return String.format("%.2f", totalAmountInfo);
+    }
 }

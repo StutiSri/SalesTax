@@ -11,9 +11,11 @@ buildscript {
 plugins {
     id 'org.springframework.boot' version '1.5.3.RELEASE'
 }
+
 apply plugin: 'java'
 apply plugin: 'war'
 apply plugin: 'idea'
+apply plugin: 'application'
 apply plugin: 'docker'
 
 idea {
@@ -29,23 +31,26 @@ war{
 
 //Get dependencies from Maven central repository
 repositories {
-    mavenCentral()
+    jcenter()
+}
+
+configurations {
+    dev
 }
 
 //Project dependencies
 dependencies {
+    dev("org.springframework.boot:spring-boot-devtools")
     compile("org.springframework.boot:spring-boot-starter-web")
     compile("org.thymeleaf:thymeleaf-spring4")
     compile("nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect")
-    providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
     testCompile 'junit:junit:4.12'
-    compile 'junit:junit:4.12'
 }
 
 group = "stutisrivastv"
 
 task buildDocker(type: Docker, dependsOn: build) {      // this task will build our Docker image
-    push = true
+    push = false
     applicationName = 'salestax'
     dockerfile = file('Dockerfile')
     tagVersion = System.getenv('TRAVIS_BUILD_NUMBER') ? System.getenv('TRAVIS_BUILD_NUMBER') : 0
@@ -55,4 +60,9 @@ task buildDocker(type: Docker, dependsOn: build) {      // this task will build 
             into stageDir
         }
     }
+}
+
+bootRun {
+    // Use Spring Boot DevTool only when we run Gradle bootRun task
+    classpath = sourceSets.main.runtimeClasspath + configurations.dev
 }
