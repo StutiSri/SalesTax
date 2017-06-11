@@ -24,7 +24,7 @@ public class Item {
 
     @Override
     public String toString() {
-        return quantity + " " + name.trim() + " - " + shelfPrice;
+        return quantity + " " + name.trim() + " - " + String.format("%.2f",finalPrice);
     }
 
     @Override

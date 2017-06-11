@@ -63,7 +63,7 @@ public class SalesTaxTest {
 
         ArrayList<Item> itemList = new ShoppingBasket().createItemsFromList(inputItemList);
 
-        assertEquals(expectedTotalSalesTax, (Double)new SalesTaxCalculator().calculateTotalSalesTax(itemList));
+        assertEquals(expectedTotalSalesTax, (Double)new BillCalculator().calculateTotalSalesTax(itemList));
     }
 
     @Test
@@ -76,6 +76,22 @@ public class SalesTaxTest {
         String expectedTotalAmount = "74.68";
 
         ArrayList<Item> itemList = new ShoppingBasket().createItemsFromList(inputItemList);
-        assertEquals(expectedTotalAmount, new SalesTaxCalculator().calculateTotalAmount(itemList));
+
+        assertEquals(expectedTotalAmount, String.format("%.2f", new BillCalculator().calculateTotalAmount
+                (itemList)));
+    }
+
+    @Test
+    public void shouldReturnReceiptForShoppingBasket(){
+        ArrayList<String> inputItemList = new ArrayList<>();
+        inputItemList.add("1 imported bottle of perfume at 27.99");
+        inputItemList.add("1 bottle of perfume at 18.99");
+        inputItemList.add("1 packet of headache pills at 9.75");
+        inputItemList.add("1 box of imported chocolates at 11.25");
+
+        ArrayList<Item> items = new ShoppingBasket().createItemsFromList(inputItemList);
+        TestReceipt expectedReceipt = new TestReceipt(items, 6.70, 74.68);
+
+        assertEquals(expectedReceipt, new ReceiptGenerator().generateReceipt(inputItemList));
     }
 }
