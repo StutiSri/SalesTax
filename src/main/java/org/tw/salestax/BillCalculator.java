@@ -1,5 +1,8 @@
 package org.tw.salestax;
 
+import org.tw.model.item.Item;
+import org.tw.model.item.TaxableItem;
+
 import java.util.ArrayList;
 
 public class BillCalculator {
@@ -14,7 +17,7 @@ public class BillCalculator {
         totalSalesTax = 0;
         for (Item item : itemList) {
             totalSalesTax += item.getSalesTax();
-            totalAmount += item.getShelfPrice();
+            totalAmount += item.getPrice();
         }
         totalSalesTax = roundOff(totalSalesTax);
         totalAmount += totalSalesTax;

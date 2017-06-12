@@ -3,6 +3,8 @@ package org.tw.salestax;
 import org.junit.Test;
 import org.tw.inputreader.ConsoleInputReader;
 import org.tw.inputreader.InputReader;
+import org.tw.model.item.Item;
+import org.tw.model.item.TaxableItem;
 import org.tw.outputwriter.ConsoleOutputWriter;
 import org.tw.outputwriter.OutputWriter;
 

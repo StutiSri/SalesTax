@@ -1,12 +1,13 @@
 package org.tw.salestax;
 
+import org.tw.model.item.TaxableItem;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ItemParser {
-    public Item createItem(String inputItem) {
+    public TaxableItem createItem(String inputItem) {
         final String PRICE_INDICATOR = " at ";
-        final String ITEM_IMPORTED_INDICATOR = "imported";
 
         if(!isValidInput(inputItem))
             return null;
@@ -16,11 +17,7 @@ public class ItemParser {
         int quantity = getQuantityFromItemDetails(itemDetails[0]);
         String name = getNameFromItemDetails(itemDetails[0]);
 
-        boolean isImported = false;
-        if (itemDetails[0].contains(ITEM_IMPORTED_INDICATOR))
-            isImported = true;
-
-        return new Item(quantity, name, isImported, shelfPrice);
+        return new TaxableItem(quantity, name, shelfPrice);
     }
 
     private boolean isValidInput(String inputItem) {

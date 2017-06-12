@@ -1,24 +1,21 @@
-package org.tw.salestax;
+package org.tw.model.item;
 
-import org.tw.constants.SalesTaxExemptionList;
-
-import static org.tw.constants.SalesTaxValues.IMPORT_SALES_TAX;
 import static org.tw.constants.SalesTaxValues.SALES_TAX;
 
-public class Item {
+public class TaxableItem implements Item{
     private double finalPrice;
     private int quantity;
     private String name;
-    private final boolean isImported;
     private double shelfPrice;
     private double salesTax;
 
-    public Item(int quantity, String name, boolean isImported, double shelfPrice) {
+    public TaxableItem(int quantity, String name, double shelfPrice) {
         this.quantity = quantity;
         this.name = name;
-        this.isImported = isImported;
         this.shelfPrice = shelfPrice;
+
         calculateSalesTax();
+
         finalPrice = shelfPrice + salesTax;
     }
 
@@ -29,23 +26,34 @@ public class Item {
 
     @Override
     public boolean equals(Object obj) {
-        return obj instanceof Item && toString().equals(obj.toString());
+        return obj instanceof TaxableItem && toString().equals(obj.toString());
     }
 
     public void calculateSalesTax() {
-        salesTax = 0;
-        if (SalesTaxExemptionList.fromString(name) == null)
-            salesTax = (shelfPrice * SALES_TAX.getValue()) / 100;
-
-        if (isImported)
-            salesTax += (shelfPrice * IMPORT_SALES_TAX.getValue()) / 100;
+        salesTax = (shelfPrice * SALES_TAX.getValue()) / 100;
     }
 
     public double getSalesTax() {
         return salesTax;
     }
 
-    public double getShelfPrice() {
+    public double getPrice() {
         return shelfPrice;
     }
+
+    @Override
+    public String getQuantity() {
+        return Integer.toString(quantity);
+    }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public double getFinalPrice() {
+        return finalPrice;
+    }
+
 }

@@ -1,6 +1,8 @@
 package org.tw.salestax;
 
 import org.tw.inputreader.InputReader;
+import org.tw.model.item.Item;
+import org.tw.model.item.TaxableItem;
 import org.tw.outputwriter.OutputWriter;
 
 import java.util.ArrayList;
@@ -12,12 +14,17 @@ public class ReceiptGenerator {
 
     public Receipt generateReceipt(ArrayList<String> inputItemList) {
         ArrayList<Item> items = new InputParser().createItemsFromList(inputItemList);
+
         if (items == null)
             return null;
+
         ArrayList<String> itemDetails = new ArrayList<>();
+
         for (Item item : items)
             itemDetails.add(item.toString());
+
         BillCalculator billCalculator = new BillCalculator(items);
+
         return new Receipt(items, billCalculator.getTotalSalesTax(), billCalculator.getTotalAmount());
     }
 

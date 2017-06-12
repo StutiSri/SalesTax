@@ -1,6 +1,8 @@
 package org.tw.salestax;
 
 import org.junit.Test;
+import org.tw.model.item.Item;
+import org.tw.model.item.TaxableItem;
 
 import java.util.ArrayList;
 
