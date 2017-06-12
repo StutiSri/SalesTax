@@ -40,7 +40,7 @@ public class SalesTaxTest {
         Double expectedSalesTax = 1.50;
         double delta = 0.001;
 
-        assertEquals(expectedSalesTax, (Double) item.getSalesTax(), delta);
+        assertEquals(expectedSalesTax, item.getSalesTax(), delta);
     }
 
     @Test
@@ -83,8 +83,7 @@ public class SalesTaxTest {
 
         ArrayList<Item> itemList = new ShoppingBasket().createItemsFromList(inputItemList);
 
-        assertEquals(expectedTotalAmount, String.format("%.2f", new BillCalculator(itemList).getTotalAmount
-                ()));
+        assertEquals(expectedTotalAmount, String.format("%.2f", new BillCalculator(itemList).getTotalAmount()));
     }
 
     @Test

@@ -29,7 +29,7 @@ public class Item {
 
     @Override
     public boolean equals(Object obj) {
-        return toString().equals(obj.toString());
+        return obj instanceof Item && toString().equals(obj.toString());
     }
 
     public void calculateSalesTax() {

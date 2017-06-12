@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class BillCalculator {
 
-    double totalSalesTax, totalAmount;
+    private double totalSalesTax, totalAmount;
 
     public BillCalculator(ArrayList<Item> itemList) {
         calculateBillComponents(itemList);

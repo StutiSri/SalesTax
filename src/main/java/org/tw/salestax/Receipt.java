@@ -15,11 +15,11 @@ public class Receipt {
 
     @Override
     public String toString() {
-        String receipt = "";
+        StringBuilder receipt = new StringBuilder();
         for (Item item : items)
-            receipt += item + "\n";
-        receipt += "Sales Taxes - " + String.format("%.2f", salesTaxInfo) + "\n";
-        receipt += "Total - " + String.format("%.2f", totalAmountInfo) + "\n\n";
-        return receipt;
+            receipt.append(item).append("\n");
+        receipt.append("Sales Taxes - ").append(String.format("%.2f", salesTaxInfo)).append("\n");
+        receipt.append("Total - ").append(String.format("%.2f", totalAmountInfo)).append("\n\n");
+        return receipt.toString();
     }
 }

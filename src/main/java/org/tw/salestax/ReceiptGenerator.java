@@ -18,8 +18,7 @@ public class ReceiptGenerator {
         for (Item item : items)
             itemDetails.add(item.toString());
         BillCalculator billCalculator = new BillCalculator(items);
-        return new Receipt(items, billCalculator.getTotalSalesTax(), billCalculator
-                .getTotalAmount());
+        return new Receipt(items, billCalculator.getTotalSalesTax(), billCalculator.getTotalAmount());
     }
 
     public void start(InputReader inputReader, OutputWriter writer) {

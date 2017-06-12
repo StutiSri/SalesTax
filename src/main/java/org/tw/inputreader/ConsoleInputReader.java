@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class ConsoleInputReader implements InputReader {
 
-    BufferedReader bufferedReader;
+    private BufferedReader bufferedReader;
 
     public ConsoleInputReader(BufferedReader bufferedReader) {
         this.bufferedReader = bufferedReader;
