@@ -11,7 +11,7 @@ public class ReceiptGenerator {
             "details> at <price>\n\n";
 
     public Receipt generateReceipt(ArrayList<String> inputItemList) {
-        ArrayList<Item> items = new ShoppingBasket().createItemsFromList(inputItemList);
+        ArrayList<Item> items = new InputParser().createItemsFromList(inputItemList);
         if (items == null)
             return null;
         ArrayList<String> itemDetails = new ArrayList<>();
