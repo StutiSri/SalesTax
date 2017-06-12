@@ -10,8 +10,7 @@ cache:
     - $HOME/.gradle/wrapper/
 
 after_success:
-  - if [ "$TRAVIS_BRANCH" == "master" ]; then
-    docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
-    gradle buildDocker;
-    fi
-  - gradle buildDocker
+  #- if [ "$TRAVIS_BRANCH" == "master" ]; then
+  - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
+  - gradle buildDocker;
+    #fi
