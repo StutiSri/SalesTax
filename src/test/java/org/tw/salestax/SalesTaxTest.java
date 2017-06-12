@@ -12,9 +12,7 @@ import java.io.StringReader;
 import java.io.StringWriter;
 import java.util.ArrayList;
 
-import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 import static org.tw.constants.SalesTaxValues.SALES_TAX;
 
 public class SalesTaxTest {
@@ -71,7 +69,7 @@ public class SalesTaxTest {
 
         ArrayList<Item> itemList = new ShoppingBasket().createItemsFromList(inputItemList);
 
-        assertEquals(expectedTotalSalesTax, (Double)new BillCalculator().calculateTotalSalesTax(itemList));
+        assertEquals(expectedTotalSalesTax, (Double)new BillCalculator(itemList).getTotalSalesTax());
     }
 
     @Test
@@ -85,8 +83,8 @@ public class SalesTaxTest {
 
         ArrayList<Item> itemList = new ShoppingBasket().createItemsFromList(inputItemList);
 
-        assertEquals(expectedTotalAmount, String.format("%.2f", new BillCalculator().calculateTotalAmount
-                (itemList)));
+        assertEquals(expectedTotalAmount, String.format("%.2f", new BillCalculator(itemList).getTotalAmount
+                ()));
     }
 
     @Test

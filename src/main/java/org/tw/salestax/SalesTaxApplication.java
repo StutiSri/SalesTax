@@ -14,7 +14,7 @@ public class SalesTaxApplication {
     public static void main(String[] args) {
         InputReader inputReader = new ConsoleInputReader(new BufferedReader(new InputStreamReader(System.in)));
         OutputWriter outputWriter = new ConsoleOutputWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
-        new ReceiptGenerator().start(inputReader,outputWriter);
+        new ReceiptGenerator().start(inputReader, outputWriter);
     }
 
 }

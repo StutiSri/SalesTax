@@ -10,26 +10,26 @@ public class ReceiptGenerator {
     public static final String INVALID_INPUT_ERROR_MESSAGE = "Kindly re-enter the details of the basket in the following format : <quantity> <name " +
             "details> at <price>\n\n";
 
-    public Receipt generateReceipt(ArrayList<String> inputItemList){
+    public Receipt generateReceipt(ArrayList<String> inputItemList) {
         ArrayList<Item> items = new ShoppingBasket().createItemsFromList(inputItemList);
-        if(items == null)
+        if (items == null)
             return null;
         ArrayList<String> itemDetails = new ArrayList<>();
-        for(Item item : items)
+        for (Item item : items)
             itemDetails.add(item.toString());
-        BillCalculator billCalculator = new BillCalculator();
-        return new Receipt(items, billCalculator.calculateTotalSalesTax(items), billCalculator
-                .calculateTotalAmount(items));
+        BillCalculator billCalculator = new BillCalculator(items);
+        return new Receipt(items, billCalculator.getTotalSalesTax(), billCalculator
+                .getTotalAmount());
     }
 
-    public void start(InputReader inputReader, OutputWriter writer){
+    public void start(InputReader inputReader, OutputWriter writer) {
         ArrayList<String> inputItemList;
-        while(true){
+        while (true) {
             inputItemList = inputReader.read();
-            if(inputItemList == null)
+            if (inputItemList == null)
                 break;
             Receipt receipt = generateReceipt(inputItemList);
-            if(receipt == null) {
+            if (receipt == null) {
                 writer.write(INVALID_INPUT_ERROR_MESSAGE);
                 continue;
             }

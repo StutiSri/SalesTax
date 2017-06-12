@@ -24,7 +24,7 @@ public class Item {
 
     @Override
     public String toString() {
-        return quantity + " " + name.trim() + " - " + String.format("%.2f",finalPrice);
+        return quantity + " " + name.trim() + " - " + String.format("%.2f", finalPrice);
     }
 
     @Override
@@ -34,19 +34,15 @@ public class Item {
 
     public void calculateSalesTax() {
         salesTax = 0;
-        if(SalesTaxExemptionList.fromString(name) == null)
-            salesTax = (shelfPrice * SALES_TAX.getValue())/100;
+        if (SalesTaxExemptionList.fromString(name) == null)
+            salesTax = (shelfPrice * SALES_TAX.getValue()) / 100;
 
-        if(isImported)
-            salesTax += (shelfPrice * IMPORT_SALES_TAX.getValue())/100;
+        if (isImported)
+            salesTax += (shelfPrice * IMPORT_SALES_TAX.getValue()) / 100;
     }
 
     public double getSalesTax() {
         return salesTax;
-    }
-
-    public double getFinalPrice() {
-        return finalPrice;
     }
 
     public double getShelfPrice() {

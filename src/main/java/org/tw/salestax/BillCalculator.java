@@ -4,19 +4,28 @@ import java.util.ArrayList;
 
 public class BillCalculator {
 
-    public double calculateTotalSalesTax(ArrayList<Item> itemList) {
-        double totalSalesTax = 0;
-        for(Item item : itemList)
+    double totalSalesTax, totalAmount;
+
+    public BillCalculator(ArrayList<Item> itemList) {
+        calculateBillComponents(itemList);
+    }
+
+    private void calculateBillComponents(ArrayList<Item> itemList) {
+        totalSalesTax = 0;
+        for (Item item : itemList) {
             totalSalesTax += item.getSalesTax();
+            totalAmount += item.getShelfPrice();
+        }
         totalSalesTax = roundOff(totalSalesTax);
+        totalAmount += totalSalesTax;
+    }
+
+    public double getTotalSalesTax() {
         return totalSalesTax;
     }
 
-    public double calculateTotalAmount(ArrayList<Item> itemList) {
-        double totalPrice = calculateTotalSalesTax(itemList);
-        for(Item item : itemList)
-            totalPrice += item.getShelfPrice();
-        return totalPrice;
+    public double getTotalAmount() {
+        return totalAmount;
     }
 
     private double roundOff(double value) {
