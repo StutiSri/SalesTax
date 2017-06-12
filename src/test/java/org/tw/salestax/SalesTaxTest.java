@@ -19,7 +19,7 @@ import static org.tw.constants.SalesTaxValues.SALES_TAX;
 
 public class SalesTaxTest {
     @Test
-    public void enumSalesTaxShouldReturnIntegerValue(){
+    public void enumSalesTaxShouldReturnIntegerValue() {
         assertEquals(10, SALES_TAX.getValue());
     }
 
@@ -37,7 +37,7 @@ public class SalesTaxTest {
     }
 
     @Test
-    public void shouldReturnSalesTaxOfItem(){
+    public void shouldReturnSalesTaxOfItem() {
         Item item = new Item(1, "music CD", false, 14.99);
         Double expectedSalesTax = 1.50;
         double delta = 0.001;
@@ -46,7 +46,7 @@ public class SalesTaxTest {
     }
 
     @Test
-    public void shouldExemptSalesTaxOnItemsFromExemptedList(){
+    public void shouldExemptSalesTaxOnItemsFromExemptedList() {
         Item item = new Item(1, "book", false, 15.99);
         Double expectedSalesTax = 0.0;
 
@@ -54,7 +54,7 @@ public class SalesTaxTest {
     }
 
     @Test
-    public void shouldApplyAdditionalSalesTaxOnImportedItems(){
+    public void shouldApplyAdditionalSalesTaxOnImportedItems() {
         Item item = new Item(1, "imported chocolate bar", true, 10.00);
         Double expectedSalesTax = 0.50;
         double delta = 0.001;
@@ -63,7 +63,7 @@ public class SalesTaxTest {
     }
 
     @Test
-    public void shouldReturnTotalSalesTaxForItemsInShoppingBasket(){
+    public void shouldReturnTotalSalesTaxForItemsInShoppingBasket() {
         ArrayList<String> inputItemList = new ArrayList<>();
         inputItemList.add("1 imported box of chocolates at 10.00");
         inputItemList.add("1 imported bottle of perfume at 47.50");
@@ -71,11 +71,11 @@ public class SalesTaxTest {
 
         ArrayList<Item> itemList = new ShoppingBasket().createItemsFromList(inputItemList);
 
-        assertEquals(expectedTotalSalesTax, (Double)new BillCalculator().calculateTotalSalesTax(itemList));
+        assertEquals(expectedTotalSalesTax, (Double) new BillCalculator(itemList).getTotalSalesTax());
     }
 
     @Test
-    public void shouldReturnTotalAmountForShoppingBasket(){
+    public void shouldReturnTotalAmountForShoppingBasket() {
         ArrayList<String> inputItemList = new ArrayList<>();
         inputItemList.add("1 imported bottle of perfume at 27.99");
         inputItemList.add("1 bottle of perfume at 18.99");
@@ -85,12 +85,12 @@ public class SalesTaxTest {
 
         ArrayList<Item> itemList = new ShoppingBasket().createItemsFromList(inputItemList);
 
-        assertEquals(expectedTotalAmount, String.format("%.2f", new BillCalculator().calculateTotalAmount
-                (itemList)));
+        assertEquals(expectedTotalAmount, String.format("%.2f", new BillCalculator(itemList).getTotalAmount
+                ()));
     }
 
     @Test
-    public void shouldReturnReceiptForShoppingBasket(){
+    public void shouldReturnReceiptForShoppingBasket() {
         ArrayList<String> inputItemList = new ArrayList<>();
         inputItemList.add("1 imported bottle of perfume at 27.99");
         inputItemList.add("1 bottle of perfume at 18.99");
@@ -104,7 +104,7 @@ public class SalesTaxTest {
     }
 
     @Test
-    public void shouldReturnReceiptForShoppingBasketInputByUser(){
+    public void shouldReturnReceiptForShoppingBasketInputByUser() {
         InputReader inputReader = new ConsoleInputReader(new BufferedReader(new StringReader("1 book at 12.49\n" +
                 "1 music CD at 14.99\n" +
                 "1 chocolate bar at 0.85\n\n")));
@@ -123,7 +123,7 @@ public class SalesTaxTest {
     }
 
     @Test
-    public void shouldPrintErrorMessageForInvalidInputFormat(){
+    public void shouldPrintErrorMessageForInvalidInputFormat() {
         InputReader inputReader = new ConsoleInputReader(new BufferedReader(new StringReader("1 book at 12.49\n" +
                 "1 music CD for 14.99\n" +
                 "1 chocolate bar at 0.85\n\n")));
